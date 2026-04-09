@@ -37,7 +37,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: 
+    background:
         radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
         radial-gradient(circle at 80% 80%, rgba(14, 165, 233, 0.08) 0%, transparent 40%);
     pointer-events: none;
@@ -130,7 +130,28 @@ nav {
     align-items: center;
     text-align: center;
     padding: 0 10%;
-    margin-top: 4rem;
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%),
+        url('https://images.unsplash.com/photo-1485083269755-a7b559a4fe5e?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add a subtle glow for the hero */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60%;
+    height: 60%;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.15), transparent 70%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 1;
 }
 
 .hero h1 {
@@ -246,7 +267,9 @@ label {
     color: var(--text-muted);
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
     width: 100%;
     padding: 1rem;
     background: rgba(15, 23, 42, 0.5);
@@ -303,14 +326,16 @@ input:focus {
     border-radius: 24px;
     border: 1px solid var(--border);
     overflow: hidden;
-    overflow-x: auto; /* Added for responsiveness */
+    overflow-x: auto;
+    /* Added for responsiveness */
     -webkit-overflow-scrolling: touch;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 600px; /* Ensures table doesn't squash too much */
+    min-width: 600px;
+    /* Ensures table doesn't squash too much */
 }
 
 th {
@@ -335,8 +360,15 @@ td {
     font-weight: 600;
 }
 
-.status-pending { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
-.status-approved { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+.status-pending {
+    background: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+}
+
+.status-approved {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+}
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -345,17 +377,32 @@ td {
         flex-wrap: wrap;
         gap: 1rem;
     }
+
     .logo-img {
         width: 35px;
         height: 35px;
     }
-    .logo span { font-size: 1.1rem; }
-    
-    .hero h1 { font-size: 2.2rem; }
-    .hero { text-align: center; padding: 0 5%; margin-top: 8rem; }
-    .cta-group { flex-direction: column; width: 100%; }
-    
-    .sidebar { 
+
+    .logo span {
+        font-size: 1.1rem;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero {
+        text-align: center;
+        padding: 0 5%;
+        margin-top: 8rem;
+    }
+
+    .cta-group {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .sidebar {
         width: 100%;
         height: auto;
         position: relative;
@@ -363,19 +410,51 @@ td {
         border-right: none;
         border-bottom: 1px solid var(--border);
     }
-    .sidebar .logo { margin-bottom: 1.5rem !important; }
-    .sidebar nav ul { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .sidebar nav ul li { flex: 1; min-width: 120px; }
-    .sidebar nav ul li a { padding: 0.75rem; font-size: 0.85rem; }
-    
-    .main-content { margin-left: 0; padding: 1.5rem; }
-    .stats-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .form-container { padding: 1.5rem; margin: 8rem 1rem 4rem 1rem; }
-    .nav-links { display: none; } 
+
+    .sidebar .logo {
+        margin-bottom: 1.5rem !important;
+    }
+
+    .sidebar nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .sidebar nav ul li {
+        flex: 1;
+        min-width: 120px;
+    }
+
+    .sidebar nav ul li a {
+        padding: 0.75rem;
+        font-size: 0.85rem;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 1.5rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .form-container {
+        padding: 1.5rem;
+        margin: 8rem 1rem 4rem 1rem;
+    }
+
+    .nav-links {
+        display: none;
+    }
 }
 
 @media (max-width: 480px) {
-    .stats-grid { grid-template-columns: 1fr; }
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Modal Styles */
@@ -694,7 +773,7 @@ td {
 /* Additional Services Section */
 .additional-services {
     padding: 8rem 10%;
-    background: rgba(255,100,0, 0.02);
+    background: rgba(255, 100, 0, 0.02);
 }
 
 .service-grid {
@@ -728,8 +807,15 @@ td {
 
 /* Animations */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .animate-fade {
@@ -740,13 +826,12 @@ td {
     .feature-list {
         grid-template-columns: 1fr;
     }
-    
+
     .cta-banner {
         padding: 4rem 2rem;
     }
-    
+
     .cta-banner h2 {
         font-size: 2.5rem;
     }
 }
-
