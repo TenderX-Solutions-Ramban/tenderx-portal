@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | TenderX Solutions</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="display: flex; justify-content: center; align-items: center; min-height: 100vh;">
+
+    <div class="form-container animate-fade" style="width: 100%; max-width: 450px; margin: 0; padding: 3rem 2.5rem;">
+        <div style="text-align: center; margin-bottom: 2.5rem;">
+            <a href="index.html" class="logo" style="justify-content: center; margin-bottom: 0.5rem;">
+                <img src="tenderX Logo.png" alt="TenderX Logo" class="logo-img" style="width: 80px; height: 80px;">
+            </a>
+            <div class="logo" style="justify-content: center; font-size: 1.75rem;">TenderX <span style="color: var(--text-main); font-weight: 400;">Solutions</span></div>
+            <p style="color: var(--text-muted); margin-top: 0.5rem;">Admin Portal Login</p>
+        </div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Admin Email</label>
+                <div style="position: relative;">
+                    <i class="fas fa-envelope" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
+                    <input type="email" id="email" name="email" placeholder="admin@tenderx.io" style="padding-left: 3rem;" required>
+                </div>
+            </div>
+            <div class="form-group" style="margin-bottom: 2rem;">
+                <label for="password">Password</label>
+                <div style="position: relative;">
+                    <i class="fas fa-lock" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
+                    <input type="password" id="password" name="password" placeholder="••••••••" style="padding-left: 3rem;" required>
+                </div>
+            </div>
+            <button type="submit" class="btn-primary" style="width: 100%; padding: 1rem;">Sign In</button>
+            <div style="text-align: center; margin-top: 1.5rem;">
+                <a href="index.html" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem;"><i class="fas fa-arrow-left"></i> Back to Public Website</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Toastify for notifications -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-init.js?v=3"></script>
+
+    <script>
+        // Ensure supabase is initialized
+        const loginForm = document.getElementById('loginForm');
+        
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const submitBtn = loginForm.querySelector('button[type="submit"]');
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
+
+            try {
+                // Check if the function exists before calling
+                if (typeof window.loginAdmin !== 'function') {
+                    console.error("loginAdmin type:", typeof window.loginAdmin);
+                    throw new Error("Configuration Error: Login script not loaded correctly.");
+                }
+
+                await window.loginAdmin(email, password);
+                
+                Toastify({
+                    text: "Login Successful! Redirecting...",
+                    duration: 2000,
+                    style: { background: "#10b981" }
+                }).showToast();
+                
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1500);
+
+            } catch (error) {
+                console.error("Login attempt failed:", error);
+                Toastify({
+                    text: "Login Failed: " + error.message,
+                    duration: 5000,
+                    style: { background: "#f43f5e" }
+                }).showToast();
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Sign In';
+            }
+        });
+    </script>
+</body>
+</html>
