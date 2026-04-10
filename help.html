@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Support | GST & Tender Services Ramban | TenderX Solutions</title>
+    <meta name="description"
+        content="Get expert support for GST registration, return filing, and tender submissions in Ramban and J&K. Find answers to FAQs and contact our local experts today.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .help-hero {
+            padding: 12rem 10% 8rem;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+        }
+
+        .search-container {
+            max-width: 700px;
+            margin: 3rem auto 0;
+            position: relative;
+        }
+
+        .search-container i {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1.5rem 1.5rem 1.5rem 4rem;
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            color: white;
+            font-size: 1.1rem;
+            backdrop-filter: blur(20px);
+            transition: 0.3s;
+            box-shadow: var(--shadow);
+        }
+
+        .search-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
+        }
+
+        .support-categories {
+            padding: 4rem 10%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .category-card {
+            background: var(--glass);
+            padding: 3rem 2rem;
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            text-align: center;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .category-card:hover {
+            background: var(--card-hover);
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .category-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+            transition: 0.4s;
+        }
+
+        .category-card:hover .category-icon {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .faq-section {
+            padding: 8rem 10%;
+            background: rgba(255, 255, 255, 0.01);
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .faq-answer {
+            padding: 0 2rem 0;
+            max-height: 0;
+            overflow: hidden;
+            color: var(--text-muted);
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .faq-item.active {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 2rem 2rem;
+            max-height: 500px;
+        }
+
+        .faq-item.active i {
+            transform: rotate(180deg);
+            color: var(--primary);
+        }
+
+        .contact-support {
+            padding: 8rem 10%;
+            text-align: center;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .contact-method {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 32px;
+            border: 1px solid var(--border);
+            transition: 0.3s;
+        }
+
+        .contact-method:hover {
+            border-color: var(--secondary);
+            transform: scale(1.02);
+        }
+
+        .method-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-support {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn-whatsapp {
+            background: #25d366;
+            color: white;
+        }
+
+        .btn-email {
+            background: var(--primary);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .help-hero h1 {
+                font-size: 2.5rem;
+            }
+            .support-categories {
+                padding: 4rem 5%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="logo">
+            <img src="./tenderX%20Logo.png" alt="TenderX Logo" class="logo-img">
+            <span>TenderX <span style="color: var(--text-main); font-weight: 400;">Solutions</span></span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#features">Services</a></li>
+            <li><a href="help.html" style="color: var(--text-main)">Help Center</a></li>
+        </ul>
+        <a href="login.html" class="btn-login">Admin Login</a>
+    </nav>
+
+    <!-- Help Hero -->
+    <section class="help-hero">
+        <h1 class="animate-fade" style="font-size: 3.5rem; margin-bottom: 1rem;">How can we <span style="color: var(--primary)">help you</span> today?</h1>
+        <p class="animate-fade" style="color: var(--text-muted); font-size: 1.2rem;">Search our help center or select a category below</p>
+        
+        <div class="search-container animate-fade" style="animation-delay: 0.2s">
+            <i class="fas fa-search"></i>
+            <input type="text" class="search-input" placeholder="Search for documentation, guides, or FAQs...">
+        </div>
+    </section>
+
+    <!-- Support Categories -->
+    <section class="support-categories">
+        <a href="#" class="category-card animate-fade">
+            <div class="category-icon"><i class="fas fa-file-invoice"></i></div>
+            <h3>Tender Filing</h3>
+            <p style="color: var(--text-muted); margin-top: 0.5rem;">Learn how to prepare and submit tenders on various portals.</p>
+        </a>
+        <a href="#" class="category-card animate-fade" style="animation-delay: 0.1s">
+            <div class="category-icon"><i class="fas fa-key"></i></div>
+            <h3>DSC Registration</h3>
+            <p style="color: var(--text-muted); margin-top: 0.5rem;">Guides on applying for or renewing your Digital Signature.</p>
+        </a>
+        <a href="#" class="category-card animate-fade" style="animation-delay: 0.2s">
+            <div class="category-icon"><i class="fas fa-user-shield"></i></div>
+            <h3>Account & Security</h3>
+            <p style="color: var(--text-muted); margin-top: 0.5rem;">Managing your profile and securing your sensitive data.</p>
+        </a>
+        <a href="#" class="category-card animate-fade" style="animation-delay: 0.3s">
+            <div class="category-icon"><i class="fas fa-wallet"></i></div>
+            <h3>Payments & Billing</h3>
+            <p style="color: var(--text-muted); margin-top: 0.5rem;">Information about service fees, invoices, and payment methods.</p>
+        </a>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="section-header">
+            <h2>Frequently Asked Questions</h2>
+            <p>Quick answers to the most common questions our clients ask.</p>
+        </div>
+        
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    What documents are required for DSC registration?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Generally, you need a copy of your PAN card, Aadhaar card, a passport-sized photograph, and a mobile number linked to Aadhaar for OTP verification. For Class 3 DSC, video verification may also be required.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    How long does it take to file a tender?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    With TenderX, most tenders can be processed within 24-48 hours once all documents are provided. Urgent filings can be prioritized for same-day submission.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Which portals do you support for tender filing?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    We support all major government portals including CPPP (Central Public Procurement Portal), GeM (Government e-Marketplace), JK Tenders, and other state-specific e-procurement portals.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Is my data secure with TenderX?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Absolutely. We use industry-standard encryption protocols and secure cloud storage to ensure your business documents and digital signatures are never compromised.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    Can I track the status of my tender application?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Yes, if you have an account, you can log in to your dashboard to see real-time updates on your submission, from document review to final portal submission.
+                </div>
+            </div>
+
+            <!-- GST FAQs -->
+            <div class="faq-item">
+                <div class="faq-question">
+                    How can I register for GST in Ramban?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    You can visit our office near the Ramban Bus Stand with your PAN, Aadhaar, and business address proof. We handle the entire registration process online for J&K businesses.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    What are the deadlines for GST return filing in J&K?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Deadlines vary (usually 11th or 20th of every month) depending on your turnover and scheme. We provide monthly reminders to all our Ramban clients to avoid late fees.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Support -->
+    <section class="contact-support">
+        <div class="section-header">
+            <h2>Still need help?</h2>
+            <p>If you couldn't find what you were looking for, our experts are just a click away.</p>
+        </div>
+
+        <div class="contact-grid">
+            <div class="contact-method">
+                <div class="method-icon"><i class="fab fa-whatsapp"></i></div>
+                <h3>Chat on WhatsApp</h3>
+                <p style="color: var(--text-muted); margin-top: 1rem;">Get instant responses for quick queries during business hours.</p>
+                <a href="https://wa.me/919149858527" class="btn-support btn-whatsapp">Start Chat</a>
+            </div>
+            
+            <div class="contact-method">
+                <div class="method-icon"><i class="fas fa-envelope-open-text"></i></div>
+                <h3>Email Support</h3>
+                <p style="color: var(--text-muted); margin-top: 1rem;">For complex issues or document reviews, send us an email.</p>
+                <a href="mailto:rambantenders@gmail.com" class="btn-support btn-email">Send Email</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact"
+        style="padding: 5rem 10% 2rem; border-top: 1px solid var(--border); background: var(--bg-dark);">
+        <div
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 4rem; margin-bottom: 4rem;">
+            <div>
+                <a href="#" class="logo" style="margin-bottom: 1.5rem;">
+                    <img src="./tenderX%20Logo.png" alt="TenderX Logo" class="logo-img"
+                        style="width: 50px; height: 50px;">
+                    <span>TenderX</span>
+                </a>
+                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Empowering contractors through professional
+                    e-procurement consulting and seamless tender submission workflows.</p>
+                <div style="display: flex; gap: 1rem;">
+                    <a href="#" style="color: var(--text-muted); font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
+                    <a href="#" style="color: var(--text-muted); font-size: 1.2rem;"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" style="color: var(--text-muted); font-size: 1.2rem;"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1.5rem; color: var(--text-main);">Quick Links</h4>
+                <ul style="list-style: none; color: var(--text-muted);">
+                    <li style="margin-bottom: 0.5rem;"><a href="submit-tender.html"
+                            style="color: inherit; text-decoration: none;">Submit Online</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="help.html"
+                            style="color: inherit; text-decoration: none;">Help Center</a></li>
+                    <li style="margin-bottom: 0.5rem;">Terms & Conditions</li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1.5rem; color: var(--text-main);">Contact Info</h4>
+                <ul style="list-style: none; color: var(--text-muted);">
+                    <li style="margin-bottom: 1rem;"><i class="fas fa-envelope"
+                            style="margin-right: 12px; color: var(--primary);"></i> rambantenders@gmail.com</li>
+                    <li style="margin-bottom: 1rem;"><i class="fas fa-phone"
+                            style="margin-right: 12px; color: var(--primary);"></i> +91 9149858527</li>
+                </ul>
+            </div>
+        </div>
+        <div
+            style="padding-top: 2rem; border-top: 1px solid var(--border); text-align: center; color: var(--text-muted); font-size: 0.9rem;">
+            &copy; 2026 <strong>TenderX Solutions</strong>.
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion Logic
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', event => {
+                const parent = item.parentElement;
+                
+                // Toggle active class
+                parent.classList.toggle('active');
+                
+                // Close other faq items (optional)
+                document.querySelectorAll('.faq-item').forEach(other => {
+                    if (other !== parent) {
+                        other.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+        // Search Filtering Logic
+        const searchInput = document.querySelector('.search-input');
+        const faqItems = document.querySelectorAll('.faq-item');
+        const categoryCards = document.querySelectorAll('.category-card');
+
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question').textContent.toLowerCase();
+                const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                
+                if (question.includes(term) || answer.includes(term)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            categoryCards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const text = card.querySelector('p').textContent.toLowerCase();
+
+                if (title.includes(term) || text.includes(term)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
