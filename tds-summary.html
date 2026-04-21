@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TDS Credit Received Summary | TenderX Solutions</title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body class="dashboard-wrapper">
+
+    <!-- Mobile Header -->
+    <header class="mobile-header flex-between no-print"
+        style="display: none; padding: 1rem; background: var(--bg-darker); border-bottom: 1px solid var(--card-border); position: sticky; top: 0; z-index: 100;">
+        <div class="logo">
+            <img src="tenderX%20Logo.png" alt="TenderX" style="width: 30px;">
+            <span style="font-size: 1.1rem; font-weight: 800;">TenderX <span class="text-muted">Admin</span></span>
+        </div>
+        <img src="https://ui-avatars.com/api/?name=Admin&background=6366f1&color=fff"
+            style="width: 32px; height: 32px; border-radius: 8px;">
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="sidebar no-print">
+        <div class="logo">
+            <img src="tenderX%20Logo.png" alt="TenderX Logo" class="logo-img">
+            <span>TenderX Solutions</span>
+        </div>
+
+        <nav class="nav-list">
+            <ul style="list-style: none;">
+                <li class="nav-item">
+                    <a href="dashboard.html" class="nav-link">
+                        <i class="fas fa-chart-line"></i> <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="submissions.html" class="nav-link">
+                        <i class="fas fa-file-invoice"></i> <span>Submissions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="contractors.html" class="nav-link">
+                        <i class="fas fa-users"></i> <span>Contractors</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="documents.html" class="nav-link">
+                        <i class="fas fa-folder-open"></i> <span>Documents</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="tds-summary.html" class="nav-link active">
+                        <i class="fas fa-calculator"></i> <span>TDS Summary</span>
+                    </a>
+                </li>
+            </ul>
+
+            <ul style="list-style: none; margin-top: auto; padding-top: 5rem;">
+                <li>
+                    <a href="javascript:void(0)" onclick="logoutAdmin()" class="nav-link" style="color: var(--accent);">
+                        <i class="fas fa-right-from-bracket"></i> <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <div class="container py-lg">
+            <!-- Header Section -->
+            <div class="flex-between mb-lg no-print gap-md">
+                <div class="flex gap-md" style="align-items: center;">
+                    <div class="icon-box">
+                        <i class="fas fa-calculator" style="font-size: 1.5rem;"></i>
+                    </div>
+                    <div>
+                        <h1 class="title" style="font-size: 1.8rem;">TDS Credit Summary</h1>
+                        <p class="text-muted">Generate professional financial summaries for clients</p>
+                    </div>
+                </div>
+                <div class="flex gap-sm">
+                    <button onclick="resetForm()" class="btn outline">
+                        <i class="fas fa-undo"></i> Reset
+                    </button>
+                    <a href="dashboard.html" class="btn outline">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </a>
+                </div>
+            </div>
+
+            <!-- INPUT SECTION -->
+            <div id="input-section" class="animate-fade-in no-print">
+                <div class="card p-lg mb-lg">
+                    <div class="grid-4 mb-lg">
+                        <div class="form-group">
+                            <label class="label">S.No / Ref No</label>
+                            <input type="text" id="s-no" placeholder="e.g. 01, 102" oninput="saveDraft()" class="input">
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Customer Name</label>
+                            <input type="text" id="cust-name" placeholder="Full name of contractor"
+                                oninput="saveDraft()" class="input">
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Department Name</label>
+                            <input type="text" id="dept-name" placeholder="e.g. PWD, PMGSY, RDD" oninput="saveDraft()"
+                                class="input">
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Financial Year</label>
+                            <select id="fin-year" onchange="saveDraft()" class="input">
+                                <option value="2024-2025">2024 - 2025</option>
+                                <option value="2025-2026" selected>2025 - 2026</option>
+                                <option value="2026-2027">2026 - 2027</option>
+                                <option value="2027-2028">2027 - 2028</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-lg">
+                        <div class="flex-between mb-md">
+                            <h3 class="subtitle" style="font-weight: 700; color: white;">Month-wise TDS Data</h3>
+                            <p class="text-muted" style="font-style: italic; font-size: 0.8rem;">Enter individual
+                                amounts or sums like 5000+1200</p>
+                        </div>
+                        <div id="rows-container">
+                            <!-- Dynamic Rows injected here -->
+                        </div>
+                    </div>
+
+                    <div class="flex-between mt-lg pt-md" style="border-top: 1px solid var(--card-border); gap: 1rem;">
+                        <button onclick="addRow()" class="btn outline" style="width: 100%; max-width: 250px;">
+                            <i class="fas fa-plus-circle" style="color: var(--primary);"></i> Add New Month
+                        </button>
+                        <button id="generate-btn" onclick="generateOutput()" class="btn primary"
+                            style="width: 100%; max-width: 300px; padding: 15px;">
+                            Generate Summary <i class="fas fa-magic"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="save-status" class="text-center text-muted"
+                    style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em; display: none;">
+                    <i class="fas fa-check-circle" style="color: #10b981;"></i> Draft Auto-Saved
+                </div>
+            </div>
+
+            <!-- PAST SUMMARIES SECTION (New) -->
+            <div id="past-summaries-section" class="mt-lg no-print animate-fade-in">
+                <div class="flex-between mb-md">
+                    <h3 class="subtitle" style="font-weight: 700; color: white;">Recently Generated Summaries</h3>
+                    <button onclick="fetchPastSummaries()" class="btn outline"
+                        style="padding: 5px 12px; font-size: 0.8rem;">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+                <div class="table-wrapper">
+                    <table class="w-full">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Customer</th>
+                                <th>Dept</th>
+                                <th class="amount">Total Amount</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="past-summaries-body">
+                            <tr>
+                                <td colspan="5" class="text-center text-muted" style="padding: 40px;">
+                                    <i class="fas fa-spinner fa-spin"></i> Loading historical records...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- OUTPUT SECTION (Hidden initially) -->
+            <div id="output-section" class="hidden animate-fade-in" style="position: relative;">
+                <div class="flex-between mb-md no-print">
+                    <button onclick="editInput()" class="btn outline">
+                        <i class="fas fa-arrow-left"></i> Back to Edit
+                    </button>
+                    <div class="flex gap-sm">
+                        <span id="entry-count" class="badge primary">0 Entries</span>
+                    </div>
+                </div>
+
+                <div id="print-area" class="card p-lg mb-lg"
+                    style="position: relative; overflow: hidden; border-radius: 32px;">
+                    <div class="doc-watermark">TENDERX SOLUTIONS</div>
+
+                    <div>
+                        <!-- PDF Header -->
+                        <div class="flex-between mb-lg" style="align-items: flex-start;">
+                            <div class="flex gap-md" style="align-items: center;">
+                                <div
+                                    style="width: 80px; height: 80px; background: white; border-radius: 50%; padding: 8px; border: 1px solid var(--card-border); display: flex; align-items: center; justify-content: center;">
+                                    <img src="tenderX%20Logo.png" alt="TenderX Logo"
+                                        style="width: 100%; height: 100%; object-fit: contain;">
+                                </div>
+                                <div>
+                                    <h2 class="title" style="font-size: 1.5rem; text-transform: uppercase;">TenderX
+                                        Consultancy</h2>
+                                    <p class="text-muted"
+                                        style="font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">
+                                        Ramban, J&K | +91 9149858527</p>
+                                </div>
+                            </div>
+                            <div class="text-right"
+                                style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); line-height: 1.5;">
+                                rambantenders@gmail.com<br>
+                                GSTIN: (Internal Portal Generated)
+                            </div>
+                        </div>
+
+                        <!-- TITLE SECTION -->
+                        <div class="text-center mb-lg">
+                            <h2 class="title"
+                                style="font-size: 1.8rem; text-transform: uppercase; text-decoration: underline; text-underline-offset: 8px;">
+                                TDS Credit Summary</h2>
+                            <div class="mt-md">
+                                <span id="out-fy-badge" class="badge primary" style="font-size: 0.7rem;">FY --</span>
+                            </div>
+                        </div>
+
+                        <!-- CLIENT INFORMATION CARD -->
+                        <div class="grid-2 mb-lg">
+                            <div class="card p-md" style="background: rgba(255,255,255,0.02);">
+                                <label class="label">Client Details</label>
+                                <h3 id="out-cust" class="title" style="font-size: 1.25rem; text-transform: uppercase;">
+                                    ---</h3>
+                                <p id="out-dept" class="gradient-text" style="font-weight: 700; font-size: 0.85rem;">---
+                                </p>
+                            </div>
+
+                            <div class="card p-md"
+                                style="background: rgba(99, 102, 241, 0.1); border-color: rgba(99, 102, 241, 0.2); text-align: center; display: flex; flex-direction: column; justify-content: center;">
+                                <label class="label">Total Amount Claimed</label>
+                                <h3 id="out-grand-total-head" class="gradient-text title"
+                                    style="font-size: 2.2rem; -webkit-text-fill-color: initial; background: none; color: var(--primary);">
+                                    ₹ 0.00</h3>
+                            </div>
+                        </div>
+
+                        <!-- TABLE SECTION -->
+                        <div class="table-wrapper mb-lg">
+                            <table class="w-full">
+                                <thead>
+                                    <tr>
+                                        <th>Month / Period</th>
+                                        <th class="amount">TDS Amount Claimed (₹)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="out-table-body">
+                                    <!-- Results injected here -->
+                                </tbody>
+                                <tfoot>
+                                    <tr style="background: rgba(255,255,255,0.03);">
+                                        <td style="font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em;">
+                                            Consolidated Total</td>
+                                        <td id="out-grand-total" class="amount"
+                                            style="font-size: 1.5rem; color: var(--primary);">₹ 0.00</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- FOOTER / SIGNATURE SECTION -->
+                    <div class="text-center mt-lg">
+                        <div class="signature-area mb-lg">
+                            <img src="signature.png" alt="Signature"
+                                style="height: 60px; margin: 0 auto 5px; display: block; filter: grayscale(1) contrast(1.5);">
+                            <div
+                                style="width: 120px; height: 1px; background: rgba(255,255,255,0.1); margin: 0 auto 10px;">
+                            </div>
+                            <p class="label">Authorized Signatory</p>
+                        </div>
+
+                        <p class="text-muted"
+                            style="font-size: 0.65rem; max-width: 500px; margin: 0 auto var(--sp-md);">Compliance Note:
+                            This is an auto-generated statement produced by the TenderX Portal. All figures should be
+                            reconciled with the NSDL site and Form 26AS records.</p>
+
+                        <div style="border-top: 1px solid var(--card-border); padding-top: 15px;">
+                            <p class="text-muted"
+                                style="font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">
+                                Generated by TenderX Portal • <span id="gen-date-footer">---</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex-center gap-lg no-print" style="padding-bottom: 80px;">
+                    <button onclick="shareWhatsApp()" class="btn"
+                        style="background: #25D366; color: white; padding: 15px 40px; font-size: 1.1rem; border-radius: 16px;">
+                        <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i> Share on WhatsApp
+                    </button>
+                    <button onclick="exportToPDF()" class="btn primary"
+                        style="padding: 15px 40px; font-size: 1.1rem; border-radius: 16px;">
+                        <i class="fas fa-file-pdf" style="font-size: 1.25rem;"></i> Download PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast Notification System -->
+    <div id="toast" class="card"
+        style="position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%); border-color: var(--primary); color: white; padding: 12px 32px; border-radius: 999px; display: none; z-index: 2000; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        <div class="flex" style="align-items: center; gap: 12px;">
+            <i class="fas fa-info-circle" style="color: var(--primary);"></i>
+            <span id="toast-msg" style="font-weight: 500;"></span>
+        </div>
+    </div>
+
+    <script>
+        const months = ["April", "May", "June", "July", "August", "September", "October", "November", "December", "January", "February", "March"];
+        let rowCount = 0;
+        let isInitialLoad = true;
+        let isSaving = false; // Flag to prevent duplicate submissions
+
+        let currentAdminId = null;
+
+        window.onload = async () => {
+            // Check session
+            if (window.checkSession) {
+                const session = await window.checkSession();
+                if (session) currentAdminId = session.user.id;
+            }
+
+            loadDraft();
+            const dateStr = new Date().toLocaleDateString('en-IN', {
+                day: 'numeric', month: 'long', year: 'numeric'
+            });
+            const timeStr = new Date().toLocaleTimeString('en-IN', {
+                hour: '2-digit', minute: '2-digit'
+            });
+            document.getElementById('gen-date-footer').innerText = `${dateStr} AT ${timeStr}`;
+            isInitialLoad = false;
+        };
+
+        function addRow(monthVal = "", amountVal = "") {
+            const container = document.getElementById('rows-container');
+            const rowId = `row-${rowCount++}`;
+            const div = document.createElement('div');
+            div.id = rowId;
+            div.className = 'grid-12 mb-sm animate-fade-in';
+            div.style.alignItems = 'center';
+
+            const currentRows = container.querySelectorAll('.month-select').length;
+            const nextMonthIndex = currentRows % 12;
+
+            div.innerHTML = `
+                <div class="col-3">
+                    <select class="month-select input" style="font-weight: 700;">
+                        ${months.map((m, i) => `<option value="${m}" ${monthVal ? (monthVal === m ? 'selected' : '') : (i === nextMonthIndex ? 'selected' : '')}>${m}</option>`).join('')}
+                    </select>
+                </div>
+                <div class="col-8">
+                    <input type="text" placeholder="Amount (e.g. 5000+2500)" 
+                        class="amount-input input" style="font-weight: 800; color: var(--primary); font-size: 1.1rem;"
+                        oninput="validateInput(this); saveDraft();" value="${amountVal}">
+                </div>
+                <div class="col-1 text-center">
+                    <button onclick="deleteRow('${rowId}')" 
+                        class="btn outline" style="padding: 10px; border-radius: 12px; color: var(--accent);">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+            `;
+            container.appendChild(div);
+            if (!isInitialLoad) saveDraft();
+        }
+
+        function deleteRow(id) {
+            const el = document.getElementById(id);
+            if (document.querySelectorAll('.amount-input').length > 1) {
+                el.remove();
+                saveDraft();
+            } else {
+                showToast("At least one month is required.");
+            }
+        }
+
+        function resetForm() {
+            if (confirm("Clear everything?")) {
+                localStorage.removeItem('tenderx_tds_draft');
+                document.getElementById('cust-name').value = "";
+                document.getElementById('dept-name').value = "";
+                document.getElementById('fin-year').value = "2025-2026";
+                document.getElementById('rows-container').innerHTML = "";
+                rowCount = 0;
+                addRow();
+                showToast("Form Reset Successful");
+            }
+        }
+
+        function saveDraft() {
+            if (isInitialLoad) return;
+            const data = {
+                custName: document.getElementById('cust-name').value,
+                deptName: document.getElementById('dept-name').value,
+                finYear: document.getElementById('fin-year').value,
+                rows: []
+            };
+            document.querySelectorAll('#rows-container > div').forEach(row => {
+                data.rows.push({
+                    month: row.querySelector('.month-select').value,
+                    amount: row.querySelector('.amount-input').value
+                });
+            });
+            localStorage.setItem('tenderx_tds_draft', JSON.stringify(data));
+            const status = document.getElementById('save-status');
+            status.classList.remove('hidden');
+            setTimeout(() => status.classList.add('hidden'), 2000);
+        }
+
+        function loadDraft() {
+            const saved = localStorage.getItem('tenderx_tds_draft');
+            if (saved) {
+                const data = JSON.parse(saved);
+                document.getElementById('cust-name').value = data.custName || "";
+                document.getElementById('dept-name').value = data.deptName || "";
+                document.getElementById('fin-year').value = data.finYear || "2025-2026";
+                if (data.rows && data.rows.length > 0) {
+                    document.getElementById('rows-container').innerHTML = "";
+                    data.rows.forEach(r => addRow(r.month, r.amount));
+                } else addRow();
+            } else addRow();
+        }
+
+        function validateInput(input) {
+            input.value = input.value.replace(/[^0-9+,.]/g, '');
+        }
+
+        function parseAmount(str) {
+            if (!str || !str.trim()) return 0;
+            const parts = str.replace(/,/g, '').split('+');
+            let total = 0;
+            parts.forEach(p => {
+                const num = parseFloat(p.trim());
+                if (!isNaN(num)) total += num;
+            });
+            return total;
+        }
+
+        function formatCurrency(val) {
+            return new Intl.NumberFormat('en-IN', {
+                style: 'currency', currency: 'INR', maximumFractionDigits: 2
+            }).format(val);
+        }
+
+        async function generateOutput() {
+            if (isSaving) return; // Block multiple clicks
+
+            const sNo = document.getElementById('s-no').value.trim();
+            const custName = document.getElementById('cust-name').value.trim();
+            const deptName = document.getElementById('dept-name').value.trim();
+            const finYear = document.getElementById('fin-year').value;
+
+            if (!sNo) { showToast("Enter S.No / Reference No."); return; }
+            if (!custName) { showToast("Enter Customer Name."); return; }
+
+            // 1. Gather Data for Duplicate Check
+            const rows = document.querySelectorAll('#rows-container > div');
+            let grandTotal = 0;
+            const consolidatedData = {};
+
+            rows.forEach(row => {
+                const month = row.querySelector('.month-select').value;
+                const amount = parseAmount(row.querySelector('.amount-input').value.trim());
+                if (consolidatedData[month]) consolidatedData[month] += amount;
+                else consolidatedData[month] = amount;
+            });
+
+            Object.values(consolidatedData).forEach(a => grandTotal += a);
+
+            // 2. Process Identification (Decision to Insert or Update)
+            // No longer blocking on "Duplicates" - instead we Update if S.No matches
+            // We only need to gather data
+
+            // 3. UI Start saving process
+            isSaving = true;
+            const genBtn = document.getElementById('generate-btn');
+            const originalBtnText = genBtn.innerHTML;
+            genBtn.disabled = true;
+            genBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Processing...';
+
+            try {
+                const tableBody = document.getElementById('out-table-body');
+                tableBody.innerHTML = '';
+                const monthOrder = ["April", "May", "June", "July", "August", "September", "October", "November", "December", "January", "February", "March"];
+
+                let sortedMonths = Object.keys(consolidatedData).sort((a, b) => monthOrder.indexOf(a) - monthOrder.indexOf(b));
+                sortedMonths.forEach(month => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td style="font-weight: 700; color: white; font-size: 1.1rem;">${month}</td>
+                        <td class="amount" style="font-size: 1.25rem;">${formatCurrency(consolidatedData[month])}</td>
+                    `;
+                    tableBody.appendChild(tr);
+                });
+
+                document.getElementById('out-cust').innerText = custName;
+                document.getElementById('out-dept').innerText = deptName || "N/A";
+                document.getElementById('out-fy-badge').innerText = `FY ${finYear}`;
+                document.getElementById('out-grand-total').innerText = formatCurrency(grandTotal);
+                document.getElementById('out-grand-total-head').innerText = formatCurrency(grandTotal);
+                document.getElementById('entry-count').innerText = `${sortedMonths.length} Active Months`;
+
+                // --- Save to Database & LocalStorage ---
+                const finalData = {
+                    s_no: sNo, // User defined S.No is the key
+                    customer_name: custName,
+                    department_name: deptName || "N/A",
+                    financial_year: finYear,
+                    monthly_data: consolidatedData,
+                    grand_total: grandTotal,
+                    admin_id: currentAdminId
+                };
+
+                // Save to LocalStorage
+                const localData = { ...finalData, timestamp: new Date().toISOString() };
+                saveToLocalStorageHistory(localData);
+
+                // Save to Supabase (Async)
+                if (window.saveTDSSummary) {
+                    await window.saveTDSSummary(finalData);
+                    showToast(isDuplicateInHistory({ s_no: sNo }) ? "Report Updated Successfully" : "New Report Created Successfully");
+                }
+
+                document.getElementById('input-section').classList.add('hidden');
+                document.getElementById('past-summaries-section').classList.add('hidden');
+                document.getElementById('output-section').classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                fetchPastSummaries();
+
+            } catch (err) {
+                console.error("Save Failed:", err);
+                showToast("Saved Locally (Cloud Error)");
+            } finally {
+                // 4. Reset saving state
+                isSaving = false;
+                genBtn.disabled = false;
+                genBtn.innerHTML = originalBtnText;
+            }
+        }
+
+        function isDuplicateInHistory(newData) {
+            const history = JSON.parse(localStorage.getItem('tenderx_tds_history') || '[]');
+            return history.some(item => item.s_no === newData.s_no);
+        }
+
+        function saveToLocalStorageHistory(data) {
+            let history = JSON.parse(localStorage.getItem('tenderx_tds_history') || '[]');
+
+            // Check if record exists with this S.No
+            const existingIndex = history.findIndex(h => h.s_no === data.s_no);
+
+            if (existingIndex > -1) {
+                history[existingIndex] = { ...data, timestamp: new Date().toISOString() };
+            } else {
+                history.unshift({ ...data, timestamp: new Date().toISOString() });
+            }
+
+            if (history.length > 20) history.pop(); // Keep last 20
+            localStorage.setItem('tenderx_tds_history', JSON.stringify(history));
+        }
+
+        async function fetchPastSummaries() {
+            const body = document.getElementById('past-summaries-body');
+            try {
+                let data = [];
+                if (window.fetchTDSSummaries) {
+                    data = await window.fetchTDSSummaries();
+                } else {
+                    data = JSON.parse(localStorage.getItem('tenderx_tds_history') || '[]');
+                }
+
+                if (data.length === 0) {
+                    body.innerHTML = '<tr><td colspan="5" class="px-6 py-12 text-center text-slate-600">No historical records found.</td></tr>';
+                    return;
+                }
+
+                body.innerHTML = data.map(item => `
+                    <tr class="border-b border-white/5 hover:bg-white/5 transition cursor-pointer" onclick='loadHistoricalRecord(${JSON.stringify(item)})'>
+                        <td class="px-6 py-4 text-primary font-mono font-bold">#${item.s_no}</td>
+                        <td class="px-6 py-4 font-bold text-white">${item.customer_name}</td>
+                        <td class="px-6 py-4 text-slate-300">${item.department_name}</td>
+                        <td class="px-6 py-4 text-right font-black text-indigo-400">${formatCurrency(item.grand_total)}</td>
+                        <td class="px-6 py-4 text-center">
+                            <button class="p-2 hover:text-accent" onclick="event.stopPropagation(); deleteHistoricalRecord('${item.id}', '${item.timestamp}', '${item.s_no}')"><i class="fas fa-trash-alt"></i></button>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (err) {
+                body.innerHTML = '<tr><td colspan="5" class="px-6 py-12 text-center text-accent">Error loading records.</td></tr>';
+            }
+        }
+
+        function loadHistoricalRecord(item) {
+            document.getElementById('s-no').value = item.s_no;
+            document.getElementById('cust-name').value = item.customer_name;
+            document.getElementById('dept-name').value = item.department_name === "N/A" ? "" : item.department_name;
+            document.getElementById('fin-year').value = item.financial_year;
+
+            const container = document.getElementById('rows-container');
+            container.innerHTML = "";
+            rowCount = 0;
+
+            Object.entries(item.monthly_data).forEach(([month, amount]) => {
+                addRow(month, amount);
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            showToast(`Record #${item.s_no} loaded for editing`);
+        }
+
+        async function deleteHistoricalRecord(id, timestamp, sNo) {
+            if (!confirm("Delete this summary record?")) return;
+            try {
+                if (id && id !== 'undefined' && window.deleteTDSSummary) {
+                    await window.deleteTDSSummary(id);
+                } else if (sNo && window.deleteTDSSummary) {
+                    // Fallback to s_no for deletion if ID is missing (local only case)
+                    // You might need a specialized delete function for s_no
+                }
+
+                // Clear from LocalStorage history too
+                let history = JSON.parse(localStorage.getItem('tenderx_tds_history') || '[]');
+                history = history.filter(h => h.id !== id && h.timestamp !== timestamp && h.s_no !== sNo);
+                localStorage.setItem('tenderx_tds_history', JSON.stringify(history));
+
+                showToast("Record deleted successfully");
+                fetchPastSummaries();
+            } catch (err) {
+                showToast("Error deleting record");
+            }
+        }
+
+        function editInput() {
+            document.getElementById('input-section').classList.remove('hidden');
+            document.getElementById('output-section').classList.add('hidden');
+        }
+
+        function getSummaryText() {
+            const custName = document.getElementById('cust-name').value;
+            const deptName = document.getElementById('dept-name').value;
+            const finYear = document.getElementById('fin-year').value;
+            const grandTotal = document.getElementById('out-grand-total').innerText;
+            let details = "";
+            document.querySelectorAll('#out-table-body tr').forEach(row => {
+                details += `• ${row.cells[0].innerText}: ${row.cells[1].innerText}\n`;
+            });
+            return `*TDS Credit Received - Summary*\n\n🏢 *Customer:* ${custName}\n🏛️ *Dept:* ${deptName || 'N/A'}\n📅 *FY:* ${finYear}\n\n*Breakdown:*\n${details}\n💰 *Grand Total: ${grandTotal}*\n\n— Team TenderX Solutions`;
+        }
+
+        function shareWhatsApp() {
+            window.open(`https://wa.me/?text=${encodeURIComponent(getSummaryText())}`, '_blank');
+        }
+
+        function exportToPDF() {
+            window.print();
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => toast.classList.add('hidden'), 3000);
+        }
+
+        function logoutAdmin() {
+            localStorage.clear();
+            window.location.href = 'login.html';
+        }
+
+        // Initialize historical data
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(fetchPastSummaries, 1000);
+        });
+    </script>
+
+    <!-- Supabase Integration -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-init.js"></script>
+    <!-- Mobile Bottom Nav -->
+    <nav class="mobile-bottom-nav no-print">
+        <a href="dashboard.html" class="mobile-nav-item">
+            <i class="fas fa-chart-pie"></i>
+            <span>Stats</span>
+        </a>
+        <a href="submissions.html" class="mobile-nav-item">
+            <i class="fas fa-file-invoice"></i>
+            <span>Bids</span>
+        </a>
+        <a href="contractors.html" class="mobile-nav-item">
+            <i class="fas fa-users"></i>
+            <span>Clients</span>
+        </a>
+        <a href="documents.html" class="mobile-nav-item">
+            <i class="fas fa-folder-open"></i>
+            <span>Docs</span>
+        </a>
+        <a href="tds-summary.html" class="mobile-nav-item active">
+            <i class="fas fa-calculator"></i>
+            <span>TDS</span>
+        </a>
+    </nav>
+</body>
+
+</html>
