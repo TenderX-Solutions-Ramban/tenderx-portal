@@ -389,12 +389,16 @@
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td style="font-family: monospace; color: var(--primary);">#${sub.id.substring(0, 6)}</td>
-                    <td style="font-weight: 500;">${sub.contractor_name}</td>
+                    <td style="font-weight: 500;">
+                        <a href="javascript:void(0)" onclick="viewDetails('${sub.id}')" class="hover-link" style="color: var(--primary); font-weight: 700;">
+                            <i class="fas fa-user-tie" style="margin-right: 8px; font-size: 0.8rem;"></i>${sub.contractor_name}
+                        </a>
+                    </td>
                     <td style="color: var(--text-muted); width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${sub.tender_name}</td>
-                    <td>${sub.department}</td>
+                    <td><span class="badge" style="background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); font-size: 0.7rem;">${sub.department}</span></td>
                     <td style="font-weight: 600;">${sub.bid_percentage}%</td>
                     <td>
-                        <select onchange="updateStatus('${sub.id}', this.value)" style="padding: 0.4rem 0.8rem; border-radius: 8px; border: 1px solid var(--border); background: var(--glass); color: var(--text-main); font-size: 0.8rem; outline: none; width: 110px;">
+                        <select onchange="updateStatus('${sub.id}', this.value)" class="status-select status-${sub.status}">
                             <option value="pending" ${sub.status === 'pending' ? 'selected' : ''}>Pending</option>
                             <option value="approved" ${sub.status === 'approved' ? 'selected' : ''}>Done</option>
                             <option value="rejected" ${sub.status === 'rejected' ? 'selected' : ''}>Not Done</option>
@@ -496,18 +500,23 @@
             }
 
             document.getElementById('modalBodyContent').innerHTML = `
-                <div class="detail-grid">
-                    <div class="detail-item">
-                        <label>Contractor Name</label>
-                        <p>${sub.contractor_name}</p>
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 2rem; background: var(--gradient-primary); padding: 1.5rem; border-radius: 16px; color: white;">
+                    <div style="background: rgba(255,255,255,0.2); width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                        <i class="fas fa-user-circle"></i>
                     </div>
-                    <div class="detail-item">
-                        <label>Company/Agency</label>
-                        <p>${sub.company_name}</p>
+                    <div>
+                        <h3 style="margin: 0; font-size: 1.4rem;">${sub.contractor_name}</h3>
+                        <p style="margin: 0; opacity: 0.9; font-size: 0.9rem;">${sub.company_name}</p>
                     </div>
+                </div>
+
+                <h4 style="margin: 0 0 1rem; color: var(--primary); border-bottom: 1px solid var(--glass-border); padding-bottom: 0.5rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">
+                    <i class="fas fa-id-card" style="margin-right: 8px;"></i> Contractor Details
+                </h4>
+                <div class="detail-grid mb-lg">
                     <div class="detail-item">
                         <label>Email Address</label>
-                        <p>${sub.email}</p>
+                        <p style="word-break: break-all;">${sub.email}</p>
                     </div>
                     <div class="detail-item">
                         <label>Contact Number</label>
@@ -515,66 +524,71 @@
                     </div>
                 </div>
 
-                <h4 style="margin: 2rem 0 1rem; color: var(--primary); border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">Tender Information</h4>
-                <div class="detail-grid">
+                <h4 style="margin: 2rem 0 1rem; color: var(--primary); border-bottom: 1px solid var(--glass-border); padding-bottom: 0.5rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">
+                    <i class="fas fa-file-contract" style="margin-right: 8px;"></i> Tender Information
+                </h4>
+                <div class="detail-grid mb-lg">
                     <div class="detail-item" style="grid-column: span 2;">
                         <label>Work Name</label>
-                        <p>${sub.tender_name}</p>
+                        <p style="line-height: 1.4;">${sub.tender_name}</p>
                     </div>
                     <div class="detail-item">
                         <label>Department</label>
-                        <p>${sub.department}</p>
+                        <p><span class="badge primary">${sub.department}</span></p>
                     </div>
                     <div class="detail-item">
                         <label>Tender ID</label>
-                        <p>${sub.tender_id}</p>
+                        <p style="font-family: monospace;">${sub.tender_id}</p>
                     </div>
                     <div class="detail-item">
                         <label>Bid Percentage</label>
-                        <p style="color: #10b981; font-weight: 700;">${sub.bid_percentage}%</p>
+                        <p style="color: #10b981; font-weight: 800; font-size: 1.2rem;">${sub.bid_percentage}%</p>
                     </div>
                     <div class="detail-item">
                         <label>Submission Date</label>
-                        <p>${new Date(sub.created_at).toLocaleString()}</p>
+                        <p>${new Date(sub.created_at).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })}</p>
                     </div>
                 </div>
 
-                <div style="margin-bottom: 2rem; background: rgba(99, 102, 241, 0.05); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--glass-border);">
-                    <div class="detail-item" style="margin-bottom: 1rem;">
+                <h4 style="margin: 2rem 0 1rem; color: var(--primary); border-bottom: 1px solid var(--glass-border); padding-bottom: 0.5rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">
+                    <i class="fas fa-certificate" style="margin-right: 8px;"></i> IDs & Verification
+                </h4>
+                <div style="margin-bottom: 2rem; background: rgba(255, 255, 255, 0.02); padding: 1.5rem; border-radius: 16px; border: 1px solid var(--glass-border); display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                    <div class="detail-item">
                         <label>GST Details</label>
-                        <p>${sub.gst_details || 'N/A'}</p>
+                        <p>${sub.gst_details || '<span class="text-muted">Not Provided</span>'}</p>
                     </div>
                     <div class="detail-item">
-                        <label>DSC Details</label>
+                        <label>DSC Token Info</label>
                         <p id="dscDisplayField">--</p>
                     </div>
                 </div>
 
-                <h4 style="margin: 2rem 0 1rem; color: var(--primary); border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">Attached Documents</h4>
+                <h4 style="margin: 2rem 0 1rem; color: var(--primary); border-bottom: 1px solid var(--glass-border); padding-bottom: 0.5rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">
+                    <i class="fas fa-paperclip" style="margin-right: 8px;"></i> Supporting Documents
+                </h4>
                 ${docsHtml}
 
-                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                        <label style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px; display: block;">Update Submission Status</label>
-                        <div style="display: flex; gap: 12px; align-items: center;">
-                            <select id="modalStatusSelect" style="padding: 0.75rem 1rem; border-radius: 12px; background: var(--bg-darker); border: 1px solid var(--primary); color: white; outline: none; font-weight: 600; width: 180px;">
-                                <option value="pending" ${sub.status === 'pending' ? 'selected' : ''}>Pending Review</option>
-                                <option value="approved" ${sub.status === 'approved' ? 'selected' : ''}>Done / Success</option>
-                                <option value="rejected" ${sub.status === 'rejected' ? 'selected' : ''}>Not Done / Closed</option>
-                            </select>
-                            <button onclick="updateStatusFromModal('${sub.id}')" class="btn-primary" style="padding: 0.75rem 1.5rem;"><i class="fas fa-save"></i> Save Changes</button>
-                        </div>
+                <div style="margin-top: 3rem; padding: 2rem; background: rgba(99, 102, 241, 0.05); border-radius: 20px; border: 1px solid rgba(99, 102, 241, 0.2); display: flex; flex-direction: column; gap: 1rem;">
+                    <label style="font-size: 0.8rem; color: var(--primary); font-weight: 800; text-transform: uppercase; letter-spacing: 1px;">Action: Update Status</label>
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <select id="modalStatusSelect" class="status-select" style="width: 200px; height: 50px; font-size: 1rem; font-weight: 600;">
+                            <option value="pending" ${sub.status === 'pending' ? 'selected' : ''}>Pending Review</option>
+                            <option value="approved" ${sub.status === 'approved' ? 'selected' : ''}>Approved & Done</option>
+                            <option value="rejected" ${sub.status === 'rejected' ? 'selected' : ''}>Rejected / Closed</option>
+                        </select>
+                        <button onclick="updateStatusFromModal('${sub.id}')" class="btn primary" style="height: 50px; padding: 0 2rem;"><i class="fas fa-save" style="margin-right: 8px;"></i> Update Status</button>
                     </div>
                 </div>
             `;
 
-            // Fix for DSC Details parsing after injection
+            // Robust parsing for DSC Details
             const dscTarget = document.getElementById('dscDisplayField');
             if (dscTarget) {
                 try {
-                    const parsed = JSON.parse(sub.dsc_details);
+                    const parsed = typeof sub.dsc_details === 'string' ? JSON.parse(sub.dsc_details) : sub.dsc_details;
                     if (parsed && parsed.type) {
-                        dscTarget.innerHTML = `<span style="background: var(--primary); padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; margin-right: 8px;">${parsed.type}</span> ${parsed.info}`;
+                        dscTarget.innerHTML = `<span class="badge primary" style="font-size: 0.7rem; margin-right: 8px;">${parsed.type}</span> <span style="font-weight: 600;">${parsed.info || '--'}</span>`;
                     } else {
                         dscTarget.innerText = sub.dsc_details || 'N/A';
                     }
