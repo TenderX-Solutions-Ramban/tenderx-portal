@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GST Calculator | TenderX Solutions</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <a href="index.html" class="logo" style="margin-bottom: 3rem;">
+                <img src="tenderX%20Logo.png" alt="TenderX Logo" class="logo-img">
+                <span>TenderX Solutions</span>
+            </a>
+
+            <nav>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="dashboard.html" class="nav-link">
+                            <i class="fas fa-chart-line"></i> <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="submissions.html" class="nav-link">
+                            <i class="fas fa-file-invoice"></i> <span>Submissions</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contractors.html" class="nav-link">
+                            <i class="fas fa-users"></i> <span>Contractors</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="documents.html" class="nav-link">
+                            <i class="fas fa-folder-open"></i> <span>Documents</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="tds-summary.html" class="nav-link">
+                            <i class="fas fa-calculator"></i> <span>TDS Summary</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="gst-calculator.html" class="nav-link active">
+                            <i class="fas fa-receipt"></i> <span>GST Calculator</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <ul style="margin-top: auto; padding-top: 5rem;">
+                    <li>
+                        <a href="javascript:void(0)" onclick="logoutAdmin()" class="nav-link" style="color: var(--accent);">
+                            <i class="fas fa-right-from-bracket"></i> <span>Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="tx-gst-container animate-fade">
+                <!-- Header -->
+                <header class="tx-gst-header">
+                    <div class="tx-gst-title-area">
+                        <h1>GST Calculator</h1>
+                        <p class="text-muted">Premium Tax Computation Module</p>
+                    </div>
+                    <div class="tx-gst-badge">
+                        <span class="card p-sm" style="font-size: 0.8rem; font-weight: 700; color: var(--primary);">
+                            <i class="fas fa-shield-check"></i> v2.0 Premium
+                        </span>
+                    </div>
+                </header>
+
+                <div class="tx-gst-grid">
+                    <!-- Calculator Card -->
+                    <div class="tx-gst-main">
+                        <div class="card p-lg">
+                            <!-- Mode Toggle -->
+                            <div class="tx-gst-mode-toggle">
+                                <input type="radio" name="gst-mode" id="add-gst" value="add" checked>
+                                <label for="add-gst">Add GST</label>
+                                
+                                <input type="radio" name="gst-mode" id="remove-gst" value="remove">
+                                <label for="remove-gst">Remove GST</label>
+                            </div>
+
+                            <!-- Inputs -->
+                            <div class="tx-gst-input-group">
+                                <label class="tx-gst-label">Transaction Amount (₹)</label>
+                                <input type="number" id="amount" class="tx-gst-field tx-gst-amount-input" placeholder="0.00" step="0.01">
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                                <div class="tx-gst-input-group">
+                                    <label class="tx-gst-label">Tax Slab (%)</label>
+                                    <select id="gst-rate" class="tx-gst-field">
+                                        <option value="5">5% (Essentials)</option>
+                                        <option value="12">12% (Standard)</option>
+                                        <option value="18" selected>18% (Services)</option>
+                                        <option value="28">28% (Luxury)</option>
+                                        <option value="custom">Custom Rate</option>
+                                    </select>
+                                </div>
+                                <div id="custom-rate-container" class="tx-gst-input-group hidden">
+                                    <label class="tx-gst-label">Custom Rate (%)</label>
+                                    <input type="number" id="custom-rate" class="tx-gst-field" placeholder="0.00">
+                                </div>
+                            </div>
+
+                            <!-- Results -->
+                            <div class="tx-gst-results">
+                                <div class="tx-gst-res-card">
+                                    <div class="tx-gst-res-label">Base Amount</div>
+                                    <div id="res-base" class="tx-gst-res-value">₹ 0.00</div>
+                                </div>
+                                <div class="tx-gst-res-card">
+                                    <div class="tx-gst-res-label">Tax Amount</div>
+                                    <div id="res-tax" class="tx-gst-res-value">₹ 0.00</div>
+                                </div>
+                                <div class="tx-gst-res-card">
+                                    <div class="tx-gst-res-label">CGST (50%)</div>
+                                    <div id="res-cgst" class="tx-gst-res-value" style="font-size: 1rem; color: var(--text-muted);">₹ 0.00</div>
+                                </div>
+                                <div class="tx-gst-res-card">
+                                    <div class="tx-gst-res-label">SGST (50%)</div>
+                                    <div id="res-sgst" class="tx-gst-res-value" style="font-size: 1rem; color: var(--text-muted);">₹ 0.00</div>
+                                </div>
+                                <div class="tx-gst-total-box">
+                                    <div>
+                                        <div class="tx-gst-res-label" style="text-align: left;">Net Total</div>
+                                        <div id="res-total" class="tx-gst-res-value">₹ 0.00</div>
+                                    </div>
+                                    <i class="fas fa-receipt" style="font-size: 2.5rem; opacity: 0.1;"></i>
+                                </div>
+                            </div>
+
+                            <!-- Actions -->
+                            <div style="display: grid; grid-template-columns: 1fr 2.5fr; gap: 1rem; margin-top: 2rem;">
+                                <button id="reset-btn" class="btn outline">
+                                    <i class="fas fa-rotate-left"></i> Reset
+                                </button>
+                                <button id="copy-btn" class="btn primary">
+                                    <i class="fas fa-copy"></i> Copy Calculation
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- History Sidebar -->
+                    <div class="tx-gst-history">
+                        <div class="card p-md" style="height: 100%;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 10px; border-bottom: 1px solid var(--card-border);">
+                                <h3 style="font-size: 1rem; font-weight: 700; color: white;">Recent Activity</h3>
+                                <button id="clear-history" style="background: none; border: none; color: var(--accent); font-size: 0.75rem; cursor: pointer; font-weight: 700;">
+                                    <i class="fas fa-trash-can"></i> Clear
+                                </button>
+                            </div>
+                            <div id="history-list" class="tx-gst-history-list">
+                                <!-- History items will be injected here -->
+                                <div class="text-center py-xl" style="opacity: 0.5;">
+                                    <i class="fas fa-clock-rotate-left" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                                    <p style="font-size: 0.85rem;">No history found</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="tx-toast">
+        <i class="fas fa-circle-check"></i>
+        <span id="toast-msg">Copied to clipboard!</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
