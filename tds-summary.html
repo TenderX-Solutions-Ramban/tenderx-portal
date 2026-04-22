@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TDS Credit Received Summary | TenderX Solutions</title>
 
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 
@@ -200,7 +203,7 @@
                         <div class="flex-between mb-lg" style="align-items: flex-start;">
                             <div class="flex gap-md" style="align-items: center;">
                                 <div
-                                    style="width: 80px; height: 80px; background: white; border-radius: 50%; padding: 8px; border: 1px solid var(--card-border); display: flex; align-items: center; justify-content: center;">
+                                    style="width: 100px; height: 100px; background: white; border-radius: 50%; padding: 8px; border: 1px solid var(--card-border); display: flex; align-items: center; justify-content: center;">
                                     <img src="tenderX%20Logo.png" alt="TenderX Logo"
                                         style="width: 100%; height: 100%; object-fit: contain;">
                                 </div>
@@ -596,7 +599,11 @@
                         <td class="px-6 py-4 text-slate-300">${item.department_name}</td>
                         <td class="px-6 py-4 text-right font-black text-indigo-400">${formatCurrency(item.grand_total)}</td>
                         <td class="px-6 py-4 text-center">
-                            <button class="p-2 hover:text-accent" onclick="event.stopPropagation(); deleteHistoricalRecord('${item.id}', '${item.timestamp}', '${item.s_no}')"><i class="fas fa-trash-alt"></i></button>
+                            <button class="btn-icon" style="color: var(--accent); background: rgba(244, 63, 94, 0.1); border: 1px solid rgba(244, 63, 94, 0.2); width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin: 0 auto; transition: 0.3s;" 
+                                onclick="event.stopPropagation(); deleteHistoricalRecord('${item.id}', '${item.timestamp}', '${item.s_no}')" 
+                                title="Delete Summary">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
                         </td>
                     </tr>
                 `).join('');
