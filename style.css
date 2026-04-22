@@ -1637,3 +1637,34 @@ table {
     color: var(--secondary);
     margin-bottom: 1.5rem;
 }
+
+/* ACTION BUTTONS */
+.btn-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text-main);
+}
+
+.btn-icon:hover {
+    transform: translateY(-2px) scale(1.05);
+}
+
+.btn-delete {
+    background: rgba(244, 63, 94, 0.1);
+    border: 1px solid rgba(244, 63, 94, 0.2);
+    color: var(--accent);
+}
+
+.btn-delete:hover {
+    background: rgba(244, 63, 94, 0.2);
+    border-color: var(--accent);
+    color: white;
+}
