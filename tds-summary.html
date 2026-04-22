@@ -338,7 +338,6 @@
                 if (session) currentAdminId = session.user.id;
             }
 
-            loadDraft();
             const dateStr = new Date().toLocaleDateString('en-IN', {
                 day: 'numeric', month: 'long', year: 'numeric'
             });
@@ -346,7 +345,11 @@
                 hour: '2-digit', minute: '2-digit'
             });
             document.getElementById('gen-date-footer').innerText = `${dateStr} AT ${timeStr}`;
+            loadDraft();
             isInitialLoad = false;
+            
+            // Fetch past summaries after session check
+            setTimeout(fetchPastSummaries, 500);
         };
 
         function addRow(monthVal = "", amountVal = "") {
@@ -577,6 +580,8 @@
             localStorage.setItem('tenderx_tds_history', JSON.stringify(history));
         }
 
+        let historicalRecords = [];
+
         async function fetchPastSummaries() {
             const body = document.getElementById('past-summaries-body');
             try {
@@ -587,20 +592,22 @@
                     data = JSON.parse(localStorage.getItem('tenderx_tds_history') || '[]');
                 }
 
+                historicalRecords = data;
+
                 if (data.length === 0) {
                     body.innerHTML = '<tr><td colspan="5" class="px-6 py-12 text-center text-slate-600">No historical records found.</td></tr>';
                     return;
                 }
 
-                body.innerHTML = data.map(item => `
-                    <tr class="border-b border-white/5 hover:bg-white/5 transition cursor-pointer" onclick='loadHistoricalRecord(${JSON.stringify(item)})'>
+                body.innerHTML = data.map((item, index) => `
+                    <tr class="border-b border-white/5 hover:bg-white/5 transition cursor-pointer" onclick="loadHistoricalRecordByIndex(${index})">
                         <td class="px-6 py-4 text-primary font-mono font-bold">#${item.s_no}</td>
                         <td class="px-6 py-4 font-bold text-white">${item.customer_name}</td>
                         <td class="px-6 py-4 text-slate-300">${item.department_name}</td>
                         <td class="px-6 py-4 text-right font-black text-indigo-400">${formatCurrency(item.grand_total)}</td>
                         <td class="px-6 py-4 text-center">
                             <button class="btn-icon" style="color: var(--accent); background: rgba(244, 63, 94, 0.1); border: 1px solid rgba(244, 63, 94, 0.2); width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin: 0 auto; transition: 0.3s;" 
-                                onclick="event.stopPropagation(); deleteHistoricalRecord('${item.id}', '${item.timestamp}', '${item.s_no}')" 
+                                onclick="event.stopPropagation(); deleteHistoricalRecordByIndex(${index})" 
                                 title="Delete Summary">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
@@ -608,8 +615,19 @@
                     </tr>
                 `).join('');
             } catch (err) {
-                body.innerHTML = '<tr><td colspan="5" class="px-6 py-12 text-center text-accent">Error loading records.</td></tr>';
+                console.error("Historical Load Error:", err);
+                body.innerHTML = '<tr><td colspan="5" class="px-6 py-12 text-center text-accent">Error loading records. Check connection.</td></tr>';
             }
+        }
+
+        function loadHistoricalRecordByIndex(index) {
+            const item = historicalRecords[index];
+            if (item) loadHistoricalRecord(item);
+        }
+
+        function deleteHistoricalRecordByIndex(index) {
+            const item = historicalRecords[index];
+            if (item) deleteHistoricalRecord(item.id, item.timestamp, item.s_no);
         }
 
         function loadHistoricalRecord(item) {
@@ -630,19 +648,29 @@
             showToast(`Record #${item.s_no} loaded for editing`);
         }
 
-        async function deleteHistoricalRecord(id, timestamp, sNo) {
-            if (!confirm("Delete this summary record?")) return;
+        let deleteId, deleteTimestamp, deleteSNo;
+
+        function showConfirmModal(id, timestamp, sNo) {
+            deleteId = id;
+            deleteTimestamp = timestamp;
+            deleteSNo = sNo;
+            document.getElementById('confirmOverlay').classList.add('active');
+        }
+
+        function closeConfirmModal() {
+            document.getElementById('confirmOverlay').classList.remove('active');
+        }
+
+        async function confirmDelete() {
+            closeConfirmModal();
             try {
-                if (id && id !== 'undefined' && window.deleteTDSSummary) {
-                    await window.deleteTDSSummary(id);
-                } else if (sNo && window.deleteTDSSummary) {
-                    // Fallback to s_no for deletion if ID is missing (local only case)
-                    // You might need a specialized delete function for s_no
+                if (deleteId && deleteId !== 'undefined' && window.deleteTDSSummary) {
+                    await window.deleteTDSSummary(deleteId);
                 }
 
                 // Clear from LocalStorage history too
                 let history = JSON.parse(localStorage.getItem('tenderx_tds_history') || '[]');
-                history = history.filter(h => h.id !== id && h.timestamp !== timestamp && h.s_no !== sNo);
+                history = history.filter(h => h.id !== deleteId && h.timestamp !== deleteTimestamp && h.s_no !== deleteSNo);
                 localStorage.setItem('tenderx_tds_history', JSON.stringify(history));
 
                 showToast("Record deleted successfully");
@@ -650,6 +678,10 @@
             } catch (err) {
                 showToast("Error deleting record");
             }
+        }
+
+        async function deleteHistoricalRecord(id, timestamp, sNo) {
+            showConfirmModal(id, timestamp, sNo);
         }
 
         function editInput() {
@@ -721,6 +753,20 @@
             <span>TDS</span>
         </a>
     </nav>
+    <!-- Premium Confirm Modal -->
+    <div class="confirm-overlay" id="confirmOverlay">
+        <div class="confirm-card animate-fade-in">
+            <div class="confirm-icon">
+                <i class="fas fa-trash-alt"></i>
+            </div>
+            <h3 class="confirm-title">Delete Record?</h3>
+            <p class="confirm-text">This action cannot be undone. Are you sure you want to delete this summary record?</p>
+            <div class="confirm-actions">
+                <button onclick="closeConfirmModal()" class="btn outline confirm-btn">Cancel</button>
+                <button onclick="confirmDelete()" id="confirmDeleteBtn" class="btn primary confirm-btn" style="background: var(--accent);">Delete</button>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
