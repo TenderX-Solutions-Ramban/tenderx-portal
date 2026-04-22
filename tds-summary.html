@@ -315,12 +315,10 @@
     </main>
 
     <!-- Toast Notification System -->
-    <div id="toast" class="card"
-        style="position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%); border-color: var(--primary); color: white; padding: 12px 32px; border-radius: 999px; display: none; z-index: 2000; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-        <div class="flex" style="align-items: center; gap: 12px;">
-            <i class="fas fa-info-circle" style="color: var(--primary);"></i>
-            <span id="toast-msg" style="font-weight: 500;"></span>
-        </div>
+    <!-- Premium Toast Notification -->
+    <div id="toast" class="tx-toast">
+        <i class="fas fa-info-circle"></i>
+        <span id="toast-msg"></span>
     </div>
 
     <script>
@@ -712,8 +710,8 @@
         function showToast(msg) {
             const toast = document.getElementById('toast');
             document.getElementById('toast-msg').innerText = msg;
-            toast.classList.remove('hidden');
-            setTimeout(() => toast.classList.add('hidden'), 3000);
+            toast.classList.add('active');
+            setTimeout(() => toast.classList.remove('active'), 3000);
         }
 
         function logoutAdmin() {
