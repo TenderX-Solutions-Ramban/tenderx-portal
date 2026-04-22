@@ -35,59 +35,47 @@
         <aside class="sidebar">
             <a href="index.html" class="logo" style="margin-bottom: 3rem;">
                 <img src="tenderX%20Logo.png" alt="TenderX Logo" class="logo-img">
-                <span style="font-size: 1.4rem;">TenderX Solutions</span>
+                <span>TenderX Solutions</span>
             </a>
 
-            <nav
-                style="background: transparent; border: none; position: static; padding: 0; display: block; width: 100%;">
-                <ul style="list-style: none;">
-                    <li style="margin-bottom: 0.5rem;">
-                        <a href="dashboard.html"
-                            style="display: flex; align-items: center; gap: 12px; padding: 1rem; border-radius: 12px; background: var(--glass-border); color: var(--text-main); text-decoration: none; font-weight: 600;">
-                            <i class="fas fa-chart-line"></i> Dashboard
+            <nav>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="dashboard.html" class="nav-link active">
+                            <i class="fas fa-chart-line"></i> <span>Dashboard</span>
                         </a>
                     </li>
-                    <li style="margin-bottom: 0.5rem;">
-                        <a href="submissions.html"
-                            style="display: flex; align-items: center; gap: 12px; padding: 1rem; border-radius: 12px; color: var(--text-muted); text-decoration: none; transition: 0.3s;"
-                            onmouseover="this.style.background='var(--glass)'"
-                            onmouseout="this.style.background='transparent'">
-                            <i class="fas fa-file-invoice"></i> Submissions
+                    <li class="nav-item">
+                        <a href="submissions.html" class="nav-link">
+                            <i class="fas fa-file-invoice"></i> <span>Submissions</span>
                         </a>
                     </li>
-                    <li style="margin-bottom: 0.5rem;">
-                        <a href="contractors.html"
-                            style="display: flex; align-items: center; gap: 12px; padding: 1rem; border-radius: 12px; color: var(--text-muted); text-decoration: none;"
-                            onmouseover="this.style.background='var(--glass)'"
-                            onmouseout="this.style.background='transparent'">
-                            <i class="fas fa-users"></i> Contractors
+                    <li class="nav-item">
+                        <a href="contractors.html" class="nav-link">
+                            <i class="fas fa-users"></i> <span>Contractors</span>
                         </a>
                     </li>
-                    <li style="margin-bottom: 0.5rem;">
-                        <a href="documents.html"
-                            style="display: flex; align-items: center; gap: 12px; padding: 1rem; border-radius: 12px; color: var(--text-muted); text-decoration: none;"
-                            onmouseover="this.style.background='var(--glass)'"
-                            onmouseout="this.style.background='transparent'">
-                            <i class="fas fa-folder-open"></i> Documents
+                    <li class="nav-item">
+                        <a href="documents.html" class="nav-link">
+                            <i class="fas fa-folder-open"></i> <span>Documents</span>
                         </a>
                     </li>
-                    <li style="margin-bottom: 0.5rem;">
-                        <a href="tds-summary.html"
-                            style="display: flex; align-items: center; gap: 12px; padding: 1rem; border-radius: 12px; color: var(--text-muted); text-decoration: none; transition: 0.3s;"
-                            onmouseover="this.style.background='var(--glass)'"
-                            onmouseout="this.style.background='transparent'">
-                            <i class="fas fa-calculator"></i> TDS Summary
+                    <li class="nav-item">
+                        <a href="tds-summary.html" class="nav-link">
+                            <i class="fas fa-calculator"></i> <span>TDS Summary</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="gst-calculator.html" class="nav-link">
+                            <i class="fas fa-receipt"></i> <span>GST Calculator</span>
                         </a>
                     </li>
                 </ul>
 
-                <ul style="list-style: none; margin-top: auto; padding-top: 5rem;">
+                <ul style="margin-top: auto; padding-top: 5rem;">
                     <li>
-                        <a href="javascript:void(0)" onclick="logoutAdmin()"
-                            style="display: flex; align-items: center; gap: 12px; padding: 1rem; border-radius: 12px; color: var(--accent); text-decoration: none;"
-                            onmouseover="this.style.background='rgba(244, 63, 94, 0.1)'"
-                            onmouseout="this.style.background='transparent'">
-                            <i class="fas fa-right-from-bracket"></i> Logout
+                        <a href="javascript:void(0)" onclick="logoutAdmin()" class="nav-link" style="color: var(--accent);">
+                            <i class="fas fa-right-from-bracket"></i> <span>Logout</span>
                         </a>
                     </li>
                 </ul>
@@ -250,6 +238,10 @@
             <a href="tds-summary.html" class="mobile-nav-item">
                 <i class="fas fa-calculator"></i>
                 <span>TDS</span>
+            </a>
+            <a href="gst-calculator.html" class="mobile-nav-item">
+                <i class="fas fa-receipt"></i>
+                <span>GST</span>
             </a>
         </nav>
     </div>
