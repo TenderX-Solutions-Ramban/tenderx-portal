@@ -45,13 +45,13 @@
 
     <!-- Sidebar -->
     <aside class="sidebar no-print">
-        <div class="logo">
+        <a href="index.html" class="logo" style="margin-bottom: 3rem;">
             <img src="tenderX%20Logo.png" alt="TenderX Logo" class="logo-img">
             <span>TenderX Solutions</span>
-        </div>
+        </a>
 
-        <nav class="nav-list">
-            <ul style="list-style: none;">
+        <nav>
+            <ul class="nav-list">
                 <li class="nav-item">
                     <a href="dashboard.html" class="nav-link">
                         <i class="fas fa-chart-line"></i> <span>Dashboard</span>
@@ -77,9 +77,14 @@
                         <i class="fas fa-calculator"></i> <span>TDS Summary</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="gst-calculator.html" class="nav-link">
+                        <i class="fas fa-receipt"></i> <span>GST Calculator</span>
+                    </a>
+                </li>
             </ul>
 
-            <ul style="list-style: none; margin-top: auto; padding-top: 5rem;">
+            <ul style="margin-top: auto; padding-top: 5rem;">
                 <li>
                     <a href="javascript:void(0)" onclick="logoutAdmin()" class="nav-link" style="color: var(--accent);">
                         <i class="fas fa-right-from-bracket"></i> <span>Logout</span>
@@ -765,6 +770,10 @@
         <a href="tds-summary.html" class="mobile-nav-item active">
             <i class="fas fa-calculator"></i>
             <span>TDS</span>
+        </a>
+        <a href="gst-calculator.html" class="mobile-nav-item">
+            <i class="fas fa-receipt"></i>
+            <span>GST</span>
         </a>
     </nav>
 </body>
