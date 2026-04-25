@@ -7,131 +7,159 @@
     <title>TenderX Solutions | Premium Tender Management Platform</title>
 
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Custom CSS -->
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <nav class="main-nav" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 1.5rem 0; transition: 0.4s;">
-        <div class="container flex-between" style="background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(20px); padding: 1rem 2rem; border-radius: 20px; border: 1px solid var(--card-border);">
-            <a href="index.html" class="logo" style="margin-bottom: 0;">
-                <img src="tenderX%20Logo.png" alt="TenderX Logo">
-                <span>TenderX <span class="text-muted" style="font-weight: 400;">Solutions</span></span>
+<!-- NAVBAR -->
+<nav class="main-nav">
+    <div class="container flex-between nav-box">
+
+        <a href="index.html" class="logo">
+            <img src="tenderx-logo.png" alt="TenderX Logo">
+            <span>TenderX <span class="text-muted">Solutions</span></span>
+        </a>
+
+        <div class="flex gap-md nav-actions">
+            <a href="#features" class="nav-link">Features</a>
+            <a href="#stats" class="nav-link">Stats</a>
+            <a href="gst-calculator.html" class="nav-link">GST Tool</a>
+            <a href="login.html" class="btn outline">Login</a>
+            <a href="submit-tender.html" class="btn primary">Get Started</a>
+        </div>
+
+    </div>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" id="home">
+    <div class="container animate-fade">
+
+        <span class="badge primary mb-md">v5.0 Is Now Live</span>
+
+        <h1 class="title hero-title">
+            Tender Submission <br>
+            <span class="gradient-text">Redefined.</span>
+        </h1>
+
+        <p class="subtitle hero-subtitle">
+            The most advanced, secure, and intuitive platform for contractors to manage bids, TDS summaries, and tax compliance.
+        </p>
+
+        <div class="flex flex-center gap-md hero-buttons">
+            <a href="submit-tender.html" class="btn primary">
+                <i class="fas fa-paper-plane"></i> Submit Your Bid
             </a>
-            <div class="flex gap-md" style="align-items: center;">
-                <a href="login.html" class="btn outline" style="border: none;">Login</a>
-                <a href="submit-tender.html" class="btn primary">Get Started</a>
-            </div>
+            <a href="dashboard.html" class="btn outline">
+                <i class="fas fa-gauge-high"></i> Admin Portal
+            </a>
         </div>
-    </nav>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="hero" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding-top: 100px;">
-            <div class="container animate-fade">
-                <span class="badge primary mb-md" style="padding: 8px 20px;">v5.0 Is Now Live</span>
-                <h1 class="title" style="font-size: 4.5rem; margin-bottom: 1.5rem; line-height: 1.1;">Tender Submission <br> <span class="gradient-text">Redefined.</span></h1>
-                <p class="subtitle mb-lg" style="max-width: 600px; margin-left: auto; margin-right: auto; font-size: 1.2rem;">
-                    The most advanced, secure, and intuitive platform for contractors to manage bids, TDS summaries, and tax compliance.
-                </p>
-                <div class="flex flex-center gap-md">
-                    <a href="submit-tender.html" class="btn primary" style="padding: 1.5rem 3rem; font-size: 1.1rem;">
-                        <i class="fas fa-paper-plane"></i> Submit Your Bid
-                    </a>
-                    <a href="dashboard.html" class="btn outline" style="padding: 1.5rem 3rem; font-size: 1.1rem;">
-                        <i class="fas fa-gauge-high"></i> Admin Portal
-                    </a>
-                </div>
-            </div>
-        </section>
+    </div>
+</section>
 
-        <!-- Stats Section -->
-        <section class="p-lg" style="border-top: 1px solid var(--card-border); background: rgba(255,255,255,0.01);">
-            <div class="container">
-                <div class="grid-4">
-                    <div class="text-center p-md">
-                        <h2 class="title" style="font-size: 3rem; color: white;">1.2k+</h2>
-                        <p class="text-muted" style="text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 0.8rem;">Contractors</p>
-                    </div>
-                    <div class="text-center p-md">
-                        <h2 class="title" style="font-size: 3rem; color: white;">₹50Cr+</h2>
-                        <p class="text-muted" style="text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 0.8rem;">Bids Managed</p>
-                    </div>
-                    <div class="text-center p-md">
-                        <h2 class="title" style="font-size: 3rem; color: white;">99.9%</h2>
-                        <p class="text-muted" style="text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 0.8rem;">Uptime</p>
-                    </div>
-                    <div class="text-center p-md">
-                        <h2 class="title" style="font-size: 3rem; color: white;">24/7</h2>
-                        <p class="text-muted" style="text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 0.8rem;">Expert Support</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+<!-- STATS -->
+<section class="p-lg" id="stats">
+    <div class="container">
+        <div class="grid-4">
 
-        <!-- Features Section -->
-        <section class="py-xl">
-            <div class="container">
-                <div class="text-center mb-xl">
-                    <h2 class="title mb-md">All-in-One Platform</h2>
-                    <p class="text-muted">Built for the modern infrastructure ecosystem.</p>
-                </div>
-                <div class="grid-3">
-                    <div class="card p-lg text-center">
-                        <div class="icon-box mb-md" style="width: 60px; height: 60px; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
-                            <i class="fas fa-file-invoice"></i>
-                        </div>
-                        <h3 class="mb-sm">Secure Bidding</h3>
-                        <p class="text-muted" style="font-size: 0.9rem;">End-to-end encrypted tender submissions with integrated DSC token support.</p>
-                    </div>
-                    <div class="card p-lg text-center">
-                        <div class="icon-box mb-md" style="width: 60px; height: 60px; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; background: rgba(139, 92, 246, 0.15); color: var(--secondary);">
-                            <i class="fas fa-calculator"></i>
-                        </div>
-                        <h3 class="mb-sm">TDS Summary</h3>
-                        <p class="text-muted" style="font-size: 0.9rem;">Automated credit summary generation with professional CA-report formatting.</p>
-                    </div>
-                    <div class="card p-lg text-center">
-                        <div class="icon-box mb-md" style="width: 60px; height: 60px; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; background: rgba(244, 63, 94, 0.15); color: var(--accent);">
-                            <i class="fas fa-receipt"></i>
-                        </div>
-                        <h3 class="mb-sm">GST Calculator</h3>
-                        <p class="text-muted" style="font-size: 0.9rem;">Real-time tax computation for accurate bid analysis and financial planning.</p>
-                    </div>
-                </div>
+            <div class="text-center p-md stat-card">
+                <h2 class="title">1.2k+</h2>
+                <p class="text-muted">Contractors</p>
             </div>
-        </section>
-    </main>
 
-    <footer class="p-lg" style="border-top: 1px solid var(--card-border); background: var(--bg-darker);">
-        <div class="container flex-between">
-            <p class="text-muted" style="font-size: 0.85rem;">&copy; 2026 TenderX Solutions. All Rights Reserved.</p>
-            <div class="flex gap-md">
-                <a href="#" class="text-muted"><i class="fab fa-linkedin"></i></a>
-                <a href="#" class="text-muted"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="text-muted"><i class="fab fa-whatsapp"></i></a>
+            <div class="text-center p-md stat-card">
+                <h2 class="title">₹50Cr+</h2>
+                <p class="text-muted">Bids Managed</p>
             </div>
+
+            <div class="text-center p-md stat-card">
+                <h2 class="title">99.9%</h2>
+                <p class="text-muted">Uptime</p>
+            </div>
+
+            <div class="text-center p-md stat-card">
+                <h2 class="title">24/7</h2>
+                <p class="text-muted">Support</p>
+            </div>
+
         </div>
-    </footer>
+    </div>
+</section>
 
-    <script>
-        window.addEventListener('scroll', function() {
-            const nav = document.querySelector('.main-nav');
-            if (window.scrollY > 50) {
-                nav.style.padding = '0.75rem 0';
-            } else {
-                nav.style.padding = '1.5rem 0';
-            }
-        });
-    </script>
+<!-- FEATURES -->
+<section class="py-xl" id="features">
+    <div class="container">
+
+        <div class="text-center mb-xl">
+            <h2 class="title">All-in-One Platform</h2>
+            <p class="text-muted">Built for the modern infrastructure ecosystem.</p>
+        </div>
+
+        <div class="grid-3">
+
+            <div class="card p-lg text-center">
+                <div class="icon-box mb-md">
+                    <i class="fas fa-file-invoice"></i>
+                </div>
+                <h3>Secure Bidding</h3>
+                <p class="text-muted">Encrypted tender submissions</p>
+            </div>
+
+            <div class="card p-lg text-center">
+                <div class="icon-box mb-md">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <h3>TDS Summary</h3>
+                <p class="text-muted">Automated reports</p>
+            </div>
+
+            <div class="card p-lg text-center">
+                <div class="icon-box mb-md">
+                    <i class="fas fa-receipt"></i>
+                </div>
+                <h3>GST Calculator</h3>
+                <p class="text-muted">Real-time tax system</p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container flex-between">
+
+        <p class="text-muted">© 2026 TenderX Solutions</p>
+
+        <div class="flex gap-md">
+            <a href="#" class="text-muted"><i class="fab fa-linkedin"></i></a>
+            <a href="#" class="text-muted"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-muted"><i class="fab fa-whatsapp"></i></a>
+        </div>
+
+    </div>
+</footer>
+
+<!-- NAV SCROLL EFFECT -->
+<script>
+window.addEventListener('scroll', function () {
+    const nav = document.querySelector('.main-nav');
+    nav.style.padding = window.scrollY > 50 ? '0.8rem 0' : '1.5rem 0';
+});
+</script>
+
 </body>
-
 </html>
