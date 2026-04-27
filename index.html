@@ -1,164 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TenderX Solutions | Premium Tender Management Platform</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TenderX Maintenance</title>
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+}
 
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+body {
+    background: #0a0a0a;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
+.container {
+    max-width: 600px;
+    padding: 40px;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: #4f8cff;
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+p {
+    color: #aaa;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.timer {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #4f8cff;
+}
+
+.box {
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 30px;
+    border-radius: 16px;
+    background: linear-gradient(145deg, #111, #0c0c0c);
+    box-shadow: 0 0 30px rgba(79,140,255,0.1);
+}
+
+.footer {
+    margin-top: 30px;
+    font-size: 14px;
+    color: #666;
+}
+
+.status {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #4f8cff;
+}
+</style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<nav class="main-nav">
-    <div class="container flex-between nav-box">
+<div class="container">
+    <div class="logo">Tender<span>X</span></div>
 
-        <a href="index.html" class="logo">
-            <img src="tenderx-logo.png" alt="TenderX Logo">
-            <span>TenderX <span class="text-muted">Solutions</span></span>
-        </a>
-
-        <div class="flex gap-md nav-actions">
-            <a href="#features" class="nav-link">Features</a>
-            <a href="#stats" class="nav-link">Stats</a>
-            <a href="gst-calculator.html" class="nav-link">GST Tool</a>
-            <a href="login.html" class="btn outline">Login</a>
-            <a href="submit-tender.html" class="btn primary">Get Started</a>
-        </div>
-
-    </div>
-</nav>
-
-<main>
-
-<!-- HERO -->
-<section class="hero" id="home">
-    <div class="container animate-fade">
-
-        <span class="badge primary mb-md">v5.0 Is Now Live</span>
-
-        <h1 class="title hero-title">
-            Tender Submission <br>
-            <span class="gradient-text">Redefined.</span>
-        </h1>
-
-        <p class="subtitle hero-subtitle">
-            The most advanced, secure, and intuitive platform for contractors to manage bids, TDS summaries, and tax compliance.
+    <div class="box">
+        <h1>We’ll Be Back Shortly</h1>
+        <p>
+            TenderX is undergoing a quick system upgrade to enhance performance, security, and reliability.
+            Estimated downtime: 30 minutes.
         </p>
 
-        <div class="flex flex-center gap-md hero-buttons">
-            <a href="submit-tender.html" class="btn primary">
-                <i class="fas fa-paper-plane"></i> Submit Your Bid
-            </a>
-            <a href="dashboard.html" class="btn outline">
-                <i class="fas fa-gauge-high"></i> Admin Portal
-            </a>
-        </div>
+        <div class="timer" id="countdown">30:00</div>
 
+        <div class="status">🔧 System Upgrade in Progress</div>
     </div>
-</section>
 
-<!-- STATS -->
-<section class="p-lg" id="stats">
-    <div class="container">
-        <div class="grid-4">
-
-            <div class="text-center p-md stat-card">
-                <h2 class="title">1.2k+</h2>
-                <p class="text-muted">Contractors</p>
-            </div>
-
-            <div class="text-center p-md stat-card">
-                <h2 class="title">₹50Cr+</h2>
-                <p class="text-muted">Bids Managed</p>
-            </div>
-
-            <div class="text-center p-md stat-card">
-                <h2 class="title">99.9%</h2>
-                <p class="text-muted">Uptime</p>
-            </div>
-
-            <div class="text-center p-md stat-card">
-                <h2 class="title">24/7</h2>
-                <p class="text-muted">Support</p>
-            </div>
-
-        </div>
+    <div class="footer">
+        © 2026 TenderX Solutions
     </div>
-</section>
+</div>
 
-<!-- FEATURES -->
-<section class="py-xl" id="features">
-    <div class="container">
-
-        <div class="text-center mb-xl">
-            <h2 class="title">All-in-One Platform</h2>
-            <p class="text-muted">Built for the modern infrastructure ecosystem.</p>
-        </div>
-
-        <div class="grid-3">
-
-            <div class="card p-lg text-center">
-                <div class="icon-box mb-md">
-                    <i class="fas fa-file-invoice"></i>
-                </div>
-                <h3>Secure Bidding</h3>
-                <p class="text-muted">Encrypted tender submissions</p>
-            </div>
-
-            <div class="card p-lg text-center">
-                <div class="icon-box mb-md">
-                    <i class="fas fa-calculator"></i>
-                </div>
-                <h3>TDS Summary</h3>
-                <p class="text-muted">Automated reports</p>
-            </div>
-
-            <div class="card p-lg text-center">
-                <div class="icon-box mb-md">
-                    <i class="fas fa-receipt"></i>
-                </div>
-                <h3>GST Calculator</h3>
-                <p class="text-muted">Real-time tax system</p>
-            </div>
-
-        </div>
-
-    </div>
-</section>
-
-</main>
-
-<!-- FOOTER -->
-<footer class="footer">
-    <div class="container flex-between">
-
-        <p class="text-muted">© 2026 TenderX Solutions</p>
-
-        <div class="flex gap-md">
-            <a href="#" class="text-muted"><i class="fab fa-linkedin"></i></a>
-            <a href="#" class="text-muted"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="text-muted"><i class="fab fa-whatsapp"></i></a>
-        </div>
-
-    </div>
-</footer>
-
-<!-- NAV SCROLL EFFECT -->
 <script>
-window.addEventListener('scroll', function () {
-    const nav = document.querySelector('.main-nav');
-    nav.style.padding = window.scrollY > 50 ? '0.8rem 0' : '1.5rem 0';
-});
+// 30 minutes countdown
+let time = 30 * 60;
+
+const countdownEl = document.getElementById("countdown");
+
+const timer = setInterval(() => {
+    let minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    countdownEl.innerHTML = `${minutes}:${seconds}`;
+
+    if (time <= 0) {
+        clearInterval(timer);
+        countdownEl.innerHTML = "Back Online!";
+    }
+
+    time--;
+}, 1000);
 </script>
 
 </body>
